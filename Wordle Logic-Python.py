@@ -1,23 +1,26 @@
+import enchant
 Count={}
+d=enchant.Dict("en_US")
 print("Welcome to WORDLE")
-print("Your challenge is to guess a 5 letter word within 5 tries, using hints provided as you progress through the game ")
+print("Your challenge is to guess a 5 letter word within 6 tries, using hints provided as you progress through the game ")
 def inputz():
     X=input("Enter your Guess").upper()
-    if len(X)==5:
+    if len(X)==5 and d.check(X):
         return X
     else:
-        print("Enter a 5 letter word")
+        print("Enter a 5 letter english word")
         return inputz()
 
 def wrdcount(Inp):
     global Count
+    Count={}
     for i in Inp:
         if i in Count:
             Count[i][0]+=1
         else:
             Count[i]=[1,1]
 Wrd="PIANO" #The word to be guessed
-for x in range(0,5):
+for x in range(0,6):
     Inp=inputz()#user input
     wrdcount(Inp)
     for i in range(0,5):
@@ -105,9 +108,4 @@ for x in range(0,5):
 else:
     print("The word was",Wrd)
     print("Better Luck Next Time")
-
-
-
-
-
 
