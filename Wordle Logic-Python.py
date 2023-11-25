@@ -1,4 +1,6 @@
 import enchant
+from english_dictionary.scripts.read_pickle import get_dict
+import random
 Count={}
 d=enchant.Dict("en_US")
 print("Welcome to WORDLE")
@@ -19,7 +21,9 @@ def wrdcount(Inp):
             Count[i][0]+=1
         else:
             Count[i]=[1,1]
-Wrd="PIANO" #The word to be guessed
+D=get_dict()
+L=[x for x in D if len(x)==5]
+Wrd=random.choice(L).upper() #The word to be guessed
 for x in range(0,6):
     Inp=inputz()#user input
     wrdcount(Inp)
@@ -108,4 +112,3 @@ for x in range(0,6):
 else:
     print("The word was",Wrd)
     print("Better Luck Next Time")
-
